@@ -14,9 +14,18 @@
           <!-- film -->
           <ul>
             <li v-for="elemento in arrRispostaApiMovie" :key="elemento.id">
-              titolo{{ elemento.title }} <br />
-              titolo originale{{ elemento.original_title }} <br />
-              lingua {{ elemento.original_language }}
+              <img
+                :src="
+                  elemento.poster_path === null
+                    ? imgNonDisponibile
+                    : urlApiBaseImg + dimensioneImgApi + elemento.poster_path
+                "
+                alt=""
+              />
+              <br />
+              titolo: {{ elemento.title }} <br />
+              titolo originale:{{ elemento.original_title }} <br />
+              lingua: {{ elemento.original_language }}
 
               <img
                 class="bandiere"
@@ -37,7 +46,11 @@
           <ul>
             <li v-for="elemento in arrRispostaApiSerieTv" :key="elemento.id">
               <img
-                :src="urlApiBaseImg + dimensioneImgApi + elemento.poster_path"
+                :src="
+                  elemento.poster_path === null
+                    ? imgNonDisponibile
+                    : urlApiBaseImg + dimensioneImgApi + elemento.poster_path
+                "
                 alt=""
               />
               <br />
