@@ -24,8 +24,9 @@
               />
               <br />
               titolo: {{ elemento.title }} <br />
-              titolo originale:{{ elemento.original_title }} <br />
-              lingua: {{ elemento.original_language }}
+              titolo originale: {{ elemento.original_title }} <br />
+              lingua:
+              <!-- {{ elemento.original_language }} -->
 
               <img
                 class="bandiere"
@@ -36,11 +37,33 @@
                 "
                 alt=""
               /><br />
-              voto {{ elemento.vote_average }}
+              <!-- voto {{ elemento.vote_average }} -->
+              <!-- voto stelle {{ Math.round(elemento.vote_average / 2) }} -->
+              {{ elemento.overview }} <br />
+              Voto:
+              <i
+                class="fa fa-star"
+                aria-hidden="true"
+                v-for="(elementoStella, i) in Math.round(
+                  elemento.vote_average / 2
+                )"
+                :key="i"
+              ></i>
+              <i
+                class="fa fa-star-o"
+                aria-hidden="true"
+                v-for="(elementoStellaVuota, a) in 5 -
+                Math.round(elemento.vote_average / 2)"
+                :key="a"
+              ></i>
+              <!-- voto stelle {{ Math.round(elemento.vote_average / 2) }} -->
+
               <hr />
             </li>
           </ul>
         </div>
+
+        <!-- serie tv -->
         <div class="col">
           <h2>Serie</h2>
           <ul>
@@ -56,7 +79,8 @@
               <br />
               titolo: {{ elemento.name }} <br />
               titolo: originale{{ elemento.original_name }} <br />
-              lingua: {{ elemento.original_language }}
+              lingua:
+              <!-- {{ elemento.original_language }} -->
 
               <img
                 class="bandiere"
@@ -67,15 +91,32 @@
                 "
                 alt=""
               /><br />
-              voto {{ elemento.vote_average }}
+              <!-- voto {{ elemento.vote_average }} -->
+              Voto:
+              <i
+                class="fa fa-star"
+                aria-hidden="true"
+                v-for="(elementoStella, i) in Math.round(
+                  elemento.vote_average / 2
+                )"
+                :key="i"
+              ></i>
+              <i
+                class="fa fa-star-o"
+                aria-hidden="true"
+                v-for="(elementoStellaVuota, a) in 5 -
+                Math.round(elemento.vote_average / 2)"
+                :key="a"
+              ></i>
+
+              <!--  voto stelle {{ Math.round(elemento.vote_average / 2) }} -->
+
               <hr />
             </li>
           </ul>
         </div>
       </div>
     </div>
-
-    <!-- serie tv -->
 
     <!-- <img
       src="https://banner2.cleanpng.com/20180404/rgq/kisspng-earth-computer-icons-planet-symbol-earth-5ac577c7c43086.5353773315228906958036.jpg"
@@ -112,6 +153,8 @@ export default {
       dimensioneImgApi: "/w154",
       imgNonDisponibile:
         "https://www.benimobili.it/resources/img/img_non_disponibile.jpg?v=202111121350",
+
+      votoConStelle: "",
     };
   },
   methods: {
@@ -151,6 +194,7 @@ export default {
     },
   },
   mounted() {},
+  computed: {},
 };
 </script>
 
