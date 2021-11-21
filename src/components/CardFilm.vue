@@ -8,13 +8,20 @@
           : urlApiBaseImg + dimensioneImgApi + posterPath
       "
       alt=""
+      :class="posterPath === null ? 'poster-img-non-disponibile' : ''"
     />
 
     <div class="card-testo p-5 text-white text-center">
-      <p>titolo: {{ title }}</p>
-      <p>titolo originale: {{ originalTitle }}</p>
+      <p v-if="title ? (titolo = title) : (titolo = name)">
+        Titolo: {{ titolo }}
+      </p>
+      <p
+        v-if="title !== originalTitle ? (titoloOriginale = originalTitle) : ''"
+      >
+        Titolo originale: {{ originalTitle }}
+      </p>
       <div class="p-2">
-        lingua:
+        Lingua:
 
         <!-- {{ elemento.original_language }} -->
 
@@ -49,6 +56,9 @@
       <!-- voto stelle {{ Math.round(elemento.vote_average / 2) }} -->
 
       <hr />
+      <div class="overview">
+        <p>{{ overview }}</p>
+      </div>
     </div>
   </div>
 </template>
@@ -57,7 +67,6 @@
 export default {
   name: "CardFilm",
   props: [
-    //"arrRispostaApiMovie",
     "urlApiBaseImg",
     "dimensioneImgApi",
     "lingueSuportate",
@@ -65,38 +74,44 @@ export default {
     "bandiere",
     "posterPath",
     "title",
+    "name",
     "originalTitle",
+    "originalName",
     "originalLanguage",
     "voteAverage",
+    "overview",
   ],
+  data() {
+    return {
+      titolo: "",
+      titoloOriginale: "",
+    };
+  },
 };
 </script>
 
 <style lang="scss">
-.bandiere {
-  width: 20px;
-  height: 20px;
-}
 .img-card-container {
   position: relative;
   min-width: 310px;
-  //max-height: 620px;
-  //height: 620px;
   height: 100%;
   background: white;
 
   .card-testo {
     height: 100%;
     width: 100%;
-    //background-color: black;
     position: absolute;
     top: 0;
     left: 0;
     background-color: black;
     opacity: 0;
     transition: opacity 0.3s;
-    img {
-      width: 20px;
+    .bandiere {
+      width: 30px;
+    }
+    .overview {
+      overflow: auto;
+      height: 220px;
     }
   }
   .card-testo:hover {
@@ -104,8 +119,10 @@ export default {
   }
   .poster {
     width: 100%;
-    max-height: 100%;
-    object-fit: cover;
+    height: 100%;
+  }
+  .poster-img-non-disponibile {
+    object-fit: contain;
   }
 }
 </style>
